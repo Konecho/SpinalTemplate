@@ -9,19 +9,33 @@
     devShells.${system}.default = pkgs.mkShell {
       nativeBuildInputs = with pkgs; [
         zlib
+        boost
       ];
       packages = with pkgs; [
         ## managed by sbt
         # scala_2_12
         ## sbt will invoke a more recent version of openjdk
         sbt
-        verilator
         ## formal
         symbiyosys
         yices
         ## sim
         openjdk17
         gtkwave
+        verilator
+        verilog
+        (python3.withPackages (
+          p:
+            with p; [
+              pygments
+              matplotlib
+              ipykernel
+              ipywidgets
+              python-lsp-server
+              black
+              cocotb
+            ]
+        ))
       ];
     };
   };
