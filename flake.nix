@@ -15,15 +15,20 @@
         ## managed by sbt
         # scala_2_12
         ## sbt will invoke a more recent version of openjdk
-        sbt
+        # sbt
+        mill
+        openjdk17
+        # bloop
         ## formal
         symbiyosys
         yices
         ## sim
-        openjdk17
         gtkwave
         verilator
         verilog
+        yosys
+        xdot
+        # gv
         (python3.withPackages (
           p:
             with p; [

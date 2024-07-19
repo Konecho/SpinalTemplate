@@ -4,7 +4,12 @@
 *.log
 *.bak
 
+# mill
+mill.*
+.bsp/
+
 # sbt specific
+sbt-launch.jar
 .cache/
 .history/
 .lib/
