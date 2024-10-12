@@ -1,0 +1,4 @@
+[submodule "lib/SpinalHDL"]
+	path = lib/SpinalHDL
+	url = https://github.com/SpinalHDL/SpinalHDL.git
+	branch = dev

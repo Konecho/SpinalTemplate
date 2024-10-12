@@ -1,16 +1,25 @@
 import mill._, scalalib._
 
-val spinalVersion = "1.10.2a"
+import $file.lib.SpinalHDL.build
+import lib.SpinalHDL.build.{core => spinalCore}
+import lib.SpinalHDL.build.{lib => spinalLib}
+import lib.SpinalHDL.build.{idslplugin => spinalIdslplugin}
+
+val spinalVersion = "dev"
+val scalaVers = "2.12.18"
 
 object projectname extends SbtModule {
-  def scalaVersion = "2.12.18"
+  def scalaVersion = scalaVers
   override def millSourcePath = os.pwd
   def sources = T.sources(
     millSourcePath / "hw" / "spinal"
   )
-  def ivyDeps = Agg(
-    ivy"com.github.spinalhdl::spinalhdl-core:$spinalVersion",
-    ivy"com.github.spinalhdl::spinalhdl-lib:$spinalVersion"
+
+  def idslplugin = spinalIdslplugin(scalaVers)
+  def moduleDeps = Seq(
+    spinalCore(scalaVers),
+    spinalLib(scalaVers),
+    idslplugin
   )
-  def scalacPluginIvyDeps = Agg(ivy"com.github.spinalhdl::spinalhdl-idsl-plugin:$spinalVersion")
+  def scalacOptions = super.scalacOptions() ++ idslplugin.pluginOptions()
 }

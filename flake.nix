@@ -7,28 +7,37 @@
     };
   in {
     devShells.${system}.default = pkgs.mkShell {
-      nativeBuildInputs = with pkgs; [
-        zlib
-        boost
-      ];
       packages = with pkgs; [
-        ## managed by sbt
+        ## managed by sbt/mill
         # scala_2_12
-        ## sbt will invoke a more recent version of openjdk
+        # bloop
         # sbt
         mill
-        openjdk17
-        # bloop
+        jre
+        coursier
         ## formal
         symbiyosys
         yices
         ## sim
-        gtkwave
         verilator
         verilog
-        yosys
+        ## ice40
+        icestorm
+        ## ecp5
+        trellis
+        ## gui
+        gtkwave
+        pulseview
         xdot
-        # gv
+        ## cli
+        just
+        svls
+        universal-ctags
+        yosys
+        nextpnr
+        netlistsvg
+        gum
+        # nbstripout
         (python3.withPackages (
           p:
             with p; [
@@ -39,9 +48,11 @@
               python-lsp-server
               black
               cocotb
+              pytest
             ]
         ))
       ];
+      DISPLAY = ":0";
     };
   };
 }
